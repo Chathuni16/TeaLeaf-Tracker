@@ -1,0 +1,35 @@
+{
+  "expo": {
+    "name": "TeaLeaf Tracker",
+    "slug": "tealeaf-tracker",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/logo.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/logo.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#0F5B2E"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "backgroundColor": "#0F5B2E",
+        "foregroundImage": "./assets/logo.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "name": "TeaLeaf Tracker",
+      "shortName": "TeaLeaf Tracker",
+      "favicon": "./assets/logo.png"
+    },
+    "plugins": [
+      "expo-sqlite"
+    ]
+  }
+}
