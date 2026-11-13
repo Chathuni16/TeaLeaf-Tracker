@@ -1,0 +1,34 @@
+[
+  {
+    "id": "brew_black",
+    "tea_type": "Black",
+    "water_temp_c": 95,
+    "steep_minutes": 4.0,
+    "leaves_grams_per_cup": 2.0,
+    "tips": "• Use freshly drawn water brought just off the rolling boil (around 95°C).\n• Pre-warm your teapot or mug with hot water before adding leaves.\n• Cover with a lid during steeping to trap delicate volatile aromatic oils.\n• Strain promptly after 4 minutes; over-steeping releases bitter tannins."
+  },
+  {
+    "id": "brew_green",
+    "tea_type": "Green",
+    "water_temp_c": 80,
+    "steep_minutes": 3.0,
+    "leaves_grams_per_cup": 2.0,
+    "tips": "• Never use boiling water; allow kettle to cool for 3–4 minutes down to 80°C.\n• Boiling water scalds delicate green leaves and causes harsh astringency.\n• Steep gently for 3 minutes for sweet vegetal and floral sweetness.\n• Ceylon green leaves can be re-steeped a second time for 2 minutes."
+  },
+  {
+    "id": "brew_white",
+    "tea_type": "White",
+    "water_temp_c": 85,
+    "steep_minutes": 5.0,
+    "leaves_grams_per_cup": 2.0,
+    "tips": "• Heat fresh filtered spring water to approximately 85°C.\n• Use a generous tablespoon since fluffy white tea leaves have higher volume.\n• Allow 5 full minutes to gently release mild melon and peach notes.\n• White tea leaves can comfortably yield up to 3 infusions."
+  },
+  {
+    "id": "brew_silver_tips",
+    "tea_type": "Silver Tips",
+    "water_temp_c": 85,
+    "steep_minutes": 5.0,
+    "leaves_grams_per_cup": 2.0,
+    "tips": "• Brew in clear glassware or white porcelain to admire the vertical standing buds.\n• Keep water temperature steady at 85°C to avoid scorching downy bud tips.\n• Give the dense unopened needles a generous 5 minutes to slowly unfurl.\n• Savour without milk, sugar, or citrus to enjoy pure honeydew nectar."
+  }
+]

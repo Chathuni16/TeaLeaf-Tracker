@@ -1,0 +1,44 @@
+[
+  {
+    "id": "nuwara_eliya",
+    "name": "Nuwara Eliya",
+    "elevation_class": "High-grown",
+    "description": "Perched above 6,000 feet, Nuwara Eliya is the champagne region of Ceylon teas. Cool mountain breezes and misty rain produce delicate, golden liquors with exquisite floral bouquets.",
+    "image_key": "nuwara_eliya"
+  },
+  {
+    "id": "uva",
+    "name": "Uva",
+    "elevation_class": "High-grown",
+    "description": "Situated on the eastern slopes of Sri Lanka's central highlands between 3,000 and 5,000 feet. Dry winds during the quality season impart a world-renowned menthol character and pungent aroma.",
+    "image_key": "uva"
+  },
+  {
+    "id": "dimbula",
+    "name": "Dimbula",
+    "elevation_class": "High-grown",
+    "description": "Covering the western slopes between 3,500 and 5,000 feet. The south-western monsoons followed by dry crisp weather yield golden-orange liquors with crisp, clean citrus and jasmine notes.",
+    "image_key": "dimbula"
+  },
+  {
+    "id": "kandy",
+    "name": "Kandy",
+    "elevation_class": "Mid-grown",
+    "description": "The historic cradle of Ceylon tea where James Taylor planted the first commercial crop in 1867. Grown at 2,000 to 4,000 feet, producing full-bodied, robust, and copper-toned infusions.",
+    "image_key": "kandy"
+  },
+  {
+    "id": "ruhuna",
+    "name": "Ruhuna",
+    "elevation_class": "Low-grown",
+    "description": "Nestled near the southern coast and Sinharaja rainforest from sea level up to 2,000 feet. Fertile soils and warm sunshine produce deep black wiry leaves, intense malty notes, and rich sweet body.",
+    "image_key": "ruhuna"
+  },
+  {
+    "id": "sabaragamuwa",
+    "name": "Sabaragamuwa",
+    "elevation_class": "Low-grown",
+    "description": "Sri Lanka's largest tea-producing district, stretching across the foothills of Adam's Peak. Celebrated for deep golden liquors with luscious sweet caramel, dried fruit, and honey undertones.",
+    "image_key": "sabaragamuwa"
+  }
+]
