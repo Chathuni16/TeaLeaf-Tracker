@@ -9,7 +9,7 @@ export const DEFAULT_FALLBACK_IMAGE: ImageSourcePropType = heroImages.heroBanner
 /**
  * Single registry for all bundled local images.
  * Keeps image loading 100% offline and avoids runtime packager errors.
- * Now backed by src/data/images.ts — add new images there first.
+ * Backed by src/data/images.ts.
  */
 export const imageMap: Record<string, ImageSourcePropType> = {
   // App logo
@@ -25,6 +25,10 @@ export const imageMap: Record<string, ImageSourcePropType> = {
   ...estateImages,
 
   // Tea type fallbacks (also accessible by type name as key)
+  Black: teaTypeImages['Black'],
+  Green: teaTypeImages['Green'],
+  White: teaTypeImages['White'],
+  'Silver Tips': teaTypeImages['Silver Tips'],
   black_tea: teaTypeImages['Black'],
   green_tea: teaTypeImages['Green'],
   white_tea: teaTypeImages['White'],
@@ -33,6 +37,7 @@ export const imageMap: Record<string, ImageSourcePropType> = {
   // Hero & General
   welcome_bg: heroImages.welcomeBg,
   hero_tea: heroImages.heroBanner,
+  brew_cup: heroImages.brewCup,
 };
 
 /**
