@@ -1,36 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useTheme } from '../context/ThemeContext';
+import { useTeaFilters, FilterState } from '../context/FilterContext';
 import { spacing, borderRadius } from '../theme/spacing';
 import { typography } from '../theme/typography';
 import { ScreenHeader } from '../components/ScreenHeader';
 import { RootStackScreenProps } from '../navigation/types';
 import { useResponsive } from '../utils/responsive';
+import teasData from '../data/teas.json';
+import { Tea, ElevationClass, TeaType } from '../types';
 
-const REGIONS = ['Nuwara Eliya', 'Uva', 'Dimbula', 'Kandy', 'Ruhuna', 'Sabaragamuwa'];
-const ELEVATIONS = ['High-grown', 'Mid-grown', 'Low-grown'];
-const TEA_TYPES = ['Black', 'Green', 'White', 'Silver Tips'];
+const REGIONS: string[] = ['Nuwara Eliya', 'Uva', 'Dimbula', 'Kandy', 'Ruhuna', 'Sabaragamuwa'];
+const ELEVATIONS: ElevationClass[] = ['High-grown', 'Mid-grown', 'Low-grown'];
+const TEA_TYPES: TeaType[] = ['Black', 'Green', 'White', 'Silver Tips'];
+const SORT_OPTIONS: { label: string; value: FilterState['sortBy'] }[] = [
+  { label: 'Name (A–Z)', value: 'name_asc' },
+  { label: 'Name (Z–A)', value: 'name_desc' },
+  { label: 'Elevation', value: 'elevation' },
+];
 
-export const FilterScreen: React.FC<RootStackScreenProps<'FilterTeas'>> = ({ navigation, route }) => {
+export const FilterScreen: React.FC<RootStackScreenProps<'FilterTeas'>> = ({ navigation }) => {
   const { colors } = useTheme();
-  const { formMaxWidth, isDesktop, isTablet } = useResponsive();
+  const { formMaxWidth, isDesktop } = useResponsive();
+  const { filters, setFilters } = useTeaFilters();
 
-  const [selectedRegions, setSelectedRegions] = useState<string[]>(route.params?.currentFilters?.regions || []);
-  const [selectedElevations, setSelectedElevations] = useState<string[]>(
-    route.params?.currentFilters?.elevations || []
-  );
-  const [selectedTypes, setSelectedTypes] = useState<string[]>(route.params?.currentFilters?.teaTypes || []);
+  const [selectedRegions, setSelectedRegions] = useState<string[]>(filters.regions);
+  const [selectedElevations, setSelectedElevations] = useState<ElevationClass[]>(filters.elevations);
+  const [selectedTypes, setSelectedTypes] = useState<TeaType[]>(filters.teaTypes);
+  const [selectedSort, setSelectedSort] = useState<FilterState['sortBy']>(filters.sortBy);
 
   const toggleRegion = (r: string) => {
     setSelectedRegions((prev) => (prev.includes(r) ? prev.filter((item) => item !== r) : [...prev, r]));
   };
 
-  const toggleElevation = (e: string) => {
+  const toggleElevation = (e: ElevationClass) => {
     setSelectedElevations((prev) => (prev.includes(e) ? prev.filter((item) => item !== e) : [...prev, e]));
   };
 
-  const toggleType = (t: string) => {
+  const toggleType = (t: TeaType) => {
     setSelectedTypes((prev) => (prev.includes(t) ? prev.filter((item) => item !== t) : [...prev, t]));
   };
 
@@ -38,7 +46,48 @@ export const FilterScreen: React.FC<RootStackScreenProps<'FilterTeas'>> = ({ nav
     setSelectedRegions([]);
     setSelectedElevations([]);
     setSelectedTypes([]);
+    setSelectedSort('name_asc');
   };
+
+  const applyFilters = () => {
+    setFilters({
+      regions: selectedRegions,
+      elevations: selectedElevations,
+      teaTypes: selectedTypes,
+      sortBy: selectedSort,
+    });
+    navigation.goBack();
+  };
+
+  // Live count of matching teas based on current filter selections
+  const matchingCount = useMemo(() => {
+    return (teasData as Tea[]).filter((tea) => {
+      // Region: OR within category
+      if (selectedRegions.length > 0) {
+        const matchesRegion = selectedRegions.some((r) => {
+          const norm = r.toLowerCase().replace(/[\s-]+/g, '_');
+          return (
+            tea.region_id.toLowerCase() === norm ||
+            tea.region_id.toLowerCase() === r.toLowerCase() ||
+            tea.name.toLowerCase().includes(r.toLowerCase())
+          );
+        });
+        if (!matchesRegion) return false;
+      }
+
+      // Elevation: OR within category
+      if (selectedElevations.length > 0) {
+        if (!selectedElevations.includes(tea.elevation)) return false;
+      }
+
+      // Tea Type: OR within category
+      if (selectedTypes.length > 0) {
+        if (!selectedTypes.includes(tea.type)) return false;
+      }
+
+      return true;
+    }).length;
+  }, [selectedRegions, selectedElevations, selectedTypes]);
 
   const chipPaddingH = isDesktop ? spacing.lg : spacing.md;
   const chipPaddingV = isDesktop ? spacing.sm : spacing.xs + 2;
@@ -161,6 +210,43 @@ export const FilterScreen: React.FC<RootStackScreenProps<'FilterTeas'>> = ({ nav
               );
             })}
           </View>
+
+          {/* Sort by group */}
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Sort by</Text>
+          <View style={styles.chipGroup}>
+            {SORT_OPTIONS.map((opt) => {
+              const isSelected = selectedSort === opt.value;
+              return (
+                <TouchableOpacity
+                  key={opt.value}
+                  onPress={() => setSelectedSort(opt.value)}
+                  style={[
+                    styles.chip,
+                    {
+                      paddingHorizontal: chipPaddingH,
+                      paddingVertical: chipPaddingV,
+                      backgroundColor: isSelected ? colors.chipSelected : colors.chipUnselected,
+                      borderColor: isSelected ? colors.chipSelected : colors.chipBorder,
+                    },
+                  ]}
+                  accessibilityRole="radio"
+                  accessibilityState={{ checked: isSelected }}
+                >
+                  <Text
+                    style={[
+                      styles.chipText,
+                      {
+                        fontSize: chipFontSize,
+                        color: isSelected ? colors.chipSelectedText : colors.chipUnselectedText,
+                      },
+                    ]}
+                  >
+                    {opt.label}
+                  </Text>
+                </TouchableOpacity>
+              );
+            })}
+          </View>
         </ScrollView>
 
         {/* Action Footer */}
@@ -176,11 +262,13 @@ export const FilterScreen: React.FC<RootStackScreenProps<'FilterTeas'>> = ({ nav
 
           <TouchableOpacity
             style={[styles.applyBtn, { height: buttonHeight, backgroundColor: colors.primary }]}
-            onPress={() => navigation.goBack()}
+            onPress={applyFilters}
             accessibilityRole="button"
-            accessibilityLabel="Apply filters and show teas"
+            accessibilityLabel={`Apply filters and show ${matchingCount} ${matchingCount === 1 ? 'tea' : 'teas'}`}
           >
-            <Text style={styles.applyBtnText}>Show teas</Text>
+            <Text style={styles.applyBtnText}>
+              Show {matchingCount} {matchingCount === 1 ? 'tea' : 'teas'}
+            </Text>
           </TouchableOpacity>
         </View>
       </View>

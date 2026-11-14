@@ -2,13 +2,7 @@ import { NavigatorScreenParams } from '@react-navigation/native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { BottomTabScreenProps } from '@react-navigation/bottom-tabs';
 import { ElevationClass, TeaType } from '../types';
-
-export interface FilterState {
-  regions: string[];
-  elevations: ElevationClass[];
-  teaTypes: TeaType[];
-  sortBy: 'name_asc' | 'name_desc' | 'elevation';
-}
+export type { FilterState } from '../context/FilterContext';
 
 export type MainTabParamList = {
   HomeTab: undefined;
@@ -19,17 +13,11 @@ export type MainTabParamList = {
 
 export type RootStackParamList = {
   Welcome: undefined;
-<<<<<<< Updated upstream
-=======
   Login: undefined;
   SignUp: undefined;
->>>>>>> Stashed changes
   MainTabs: NavigatorScreenParams<MainTabParamList> | undefined;
   AllTeas: { regionFilter?: string; autoFocusSearch?: boolean } | undefined;
-  FilterTeas: {
-    currentFilters?: FilterState;
-    onApply?: (filters: FilterState) => void;
-  } | undefined;
+  FilterTeas: undefined;
   TeaDetails: { teaId: string };
   RegionExplorer: undefined;
   EstatesToVisit: { regionFilter?: string } | undefined;
