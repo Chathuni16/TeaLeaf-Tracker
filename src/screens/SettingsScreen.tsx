@@ -1,14 +1,8 @@
 import React, { useState } from 'react';
-<<<<<<< Updated upstream
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-=======
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch, Alert, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAuth } from '../context/AuthContext';
->>>>>>> Stashed changes
 import { useTheme, ThemeMode } from '../context/ThemeContext';
 import { spacing, borderRadius } from '../theme/spacing';
 import { typography } from '../theme/typography';
@@ -19,11 +13,6 @@ import { useResponsive } from '../utils/responsive';
 export const SettingsScreen: React.FC<RootStackScreenProps<'Settings'>> = ({ navigation }) => {
   const { themeMode, setThemeMode, colors } = useTheme();
   const { formMaxWidth, isDesktop, isTablet } = useResponsive();
-<<<<<<< Updated upstream
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
-  const [showTips, setShowTips] = useState(true);
-
-=======
   const { user, logOut } = useAuth();
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [showTips, setShowTips] = useState(true);
@@ -57,15 +46,12 @@ export const SettingsScreen: React.FC<RootStackScreenProps<'Settings'>> = ({ nav
     }
   };
 
->>>>>>> Stashed changes
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <View style={[styles.innerContent, { maxWidth: formMaxWidth }]}>
         <ScreenHeader title="Settings" showBack />
 
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-<<<<<<< Updated upstream
-=======
           {/* User Account Section */}
           <Text style={[styles.sectionTitle, { color: colors.text }]}>Account</Text>
           <View style={[styles.card, styles.accountCard, { backgroundColor: colors.surface }]}>
@@ -97,7 +83,6 @@ export const SettingsScreen: React.FC<RootStackScreenProps<'Settings'>> = ({ nav
             </TouchableOpacity>
           </View>
 
->>>>>>> Stashed changes
           {/* Appearance Section */}
           <Text style={[styles.sectionTitle, { color: colors.text }]}>Appearance</Text>
           <View style={[styles.segmentedControl, { backgroundColor: colors.surface }]}>
@@ -300,8 +285,6 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
   },
-<<<<<<< Updated upstream
-=======
   accountCard: {
     paddingVertical: spacing.md,
   },
@@ -339,5 +322,4 @@ const styles = StyleSheet.create({
     fontWeight: typography.weights.semiBold,
     marginLeft: spacing.xs,
   },
->>>>>>> Stashed changes
 });
