@@ -8,6 +8,7 @@ import { ThemeProvider, useTheme } from './src/context/ThemeContext';
 import { SettingsProvider } from './src/context/SettingsContext';
 import { FavouritesProvider } from './src/context/FavouritesContext';
 import { TripProvider } from './src/context/TripContext';
+import { AuthProvider } from './src/context/AuthContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { getDatabase } from './src/database/db';
 import { initAndSeedDatabase } from './src/database/seed';
@@ -54,15 +55,17 @@ const MainApp: React.FC = () => {
 
   return (
     <View style={styles.root}>
-    <FavouritesProvider>
-      <TripProvider>
-        <StatusBar style={isDark ? 'light' : 'dark'} />
-        <NavigationContainer documentTitle={{ formatter: () => 'TeaLeaf Tracker' }}>
-          <RootNavigator />
-        </NavigationContainer>
-      </TripProvider>
-    </FavouritesProvider>
-  </View>
+      <AuthProvider>
+        <FavouritesProvider>
+          <TripProvider>
+            <StatusBar style={isDark ? 'light' : 'dark'} />
+            <NavigationContainer documentTitle={{ formatter: () => 'TeaLeaf Tracker' }}>
+              <RootNavigator />
+            </NavigationContainer>
+          </TripProvider>
+        </FavouritesProvider>
+      </AuthProvider>
+    </View>
   );
 };
 

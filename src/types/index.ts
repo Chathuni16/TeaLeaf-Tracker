@@ -66,3 +66,20 @@ export interface FilterCriteria {
   sortBy: 'name_asc' | 'name_desc' | 'elevation';
   searchQuery?: string;
 }
+
+export interface User {
+  id: string;
+  full_name: string;
+  email: string;
+  password_hash: string;
+  salt: string;
+  created_at: string;
+}
+
+export interface UserSession {
+  id: string;
+  full_name: string;
+  email: string;
+  created_at: string;
+}
+

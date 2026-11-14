@@ -5,6 +5,10 @@ import { Ionicons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { RootStackParamList } from '../navigation/types';
+<<<<<<< Updated upstream
+=======
+import { useAuth } from '../context/AuthContext';
+>>>>>>> Stashed changes
 import { useTheme } from '../context/ThemeContext';
 import { spacing, borderRadius } from '../theme/spacing';
 import { typography } from '../theme/typography';
@@ -17,9 +21,18 @@ import { Tea } from '../types';
 export const HomeScreen: React.FC = () => {
   const navigation = useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const { colors } = useTheme();
+<<<<<<< Updated upstream
   const [menuVisible, setMenuVisible] = useState(false);
   const { contentMaxWidth, isDesktop, isTablet, numColumns, width } = useResponsive();
 
+=======
+  const { user } = useAuth();
+  const [menuVisible, setMenuVisible] = useState(false);
+  const { contentMaxWidth, isDesktop, isTablet, numColumns, width } = useResponsive();
+
+  const firstName = user?.full_name ? user.full_name.trim().split(' ')[0] : null;
+
+>>>>>>> Stashed changes
   const featuredTeas = (teasData as Tea[]).filter((t) => t.is_featured === 1);
   const heroHeight = width <= 340 ? 150 : isDesktop ? 250 : isTablet ? 210 : 170;
   const gridTileWidth = isDesktop ? '23.5%' : isTablet ? '23.5%' : '48%';
@@ -51,6 +64,22 @@ export const HomeScreen: React.FC = () => {
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
           {/* Main Title Section */}
           <View style={styles.titleSection}>
+<<<<<<< Updated upstream
+=======
+            {firstName && (
+              <Text
+                style={[
+                  styles.greetingText,
+                  {
+                    color: colors.accent,
+                    fontSize: width <= 340 ? typography.sizes.xs : typography.sizes.sm,
+                  },
+                ]}
+              >
+                Hello, {firstName} 👋
+              </Text>
+            )}
+>>>>>>> Stashed changes
             <Text
               style={[
                 styles.mainTitle,
@@ -257,6 +286,13 @@ const styles = StyleSheet.create({
   titleSection: {
     marginVertical: spacing.xs,
   },
+<<<<<<< Updated upstream
+=======
+  greetingText: {
+    fontWeight: typography.weights.semiBold,
+    marginBottom: 2,
+  },
+>>>>>>> Stashed changes
   mainTitle: {
     fontWeight: typography.weights.bold,
   },

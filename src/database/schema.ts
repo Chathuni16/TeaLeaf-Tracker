@@ -62,4 +62,13 @@ CREATE TABLE IF NOT EXISTS app_metadata (
   key TEXT PRIMARY KEY NOT NULL,
   value TEXT NOT NULL
 );
+
+CREATE TABLE IF NOT EXISTS users (
+  id TEXT PRIMARY KEY NOT NULL,
+  full_name TEXT NOT NULL,
+  email TEXT UNIQUE NOT NULL,
+  password_hash TEXT NOT NULL,
+  salt TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
 `;

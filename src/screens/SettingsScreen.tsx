@@ -1,7 +1,14 @@
 import React, { useState } from 'react';
+<<<<<<< Updated upstream
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+=======
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Switch, Alert, Platform } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
+import { useAuth } from '../context/AuthContext';
+>>>>>>> Stashed changes
 import { useTheme, ThemeMode } from '../context/ThemeContext';
 import { spacing, borderRadius } from '../theme/spacing';
 import { typography } from '../theme/typography';
@@ -12,15 +19,85 @@ import { useResponsive } from '../utils/responsive';
 export const SettingsScreen: React.FC<RootStackScreenProps<'Settings'>> = ({ navigation }) => {
   const { themeMode, setThemeMode, colors } = useTheme();
   const { formMaxWidth, isDesktop, isTablet } = useResponsive();
+<<<<<<< Updated upstream
   const [notificationsEnabled, setNotificationsEnabled] = useState(true);
   const [showTips, setShowTips] = useState(true);
 
+=======
+  const { user, logOut } = useAuth();
+  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [showTips, setShowTips] = useState(true);
+
+  const handleLogout = () => {
+    const performLogout = async () => {
+      await logOut();
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      });
+    };
+
+    if (Platform.OS === 'web') {
+      if (typeof window !== 'undefined' && window.confirm('Are you sure you want to log out of TeaLeaf Tracker?')) {
+        performLogout();
+      }
+    } else {
+      Alert.alert(
+        'Log Out',
+        'Are you sure you want to log out of TeaLeaf Tracker?',
+        [
+          { text: 'Cancel', style: 'cancel' },
+          {
+            text: 'Log Out',
+            style: 'destructive',
+            onPress: performLogout,
+          },
+        ]
+      );
+    }
+  };
+
+>>>>>>> Stashed changes
   return (
     <SafeAreaView style={[styles.container, { backgroundColor: colors.background }]} edges={['top']}>
       <View style={[styles.innerContent, { maxWidth: formMaxWidth }]}>
         <ScreenHeader title="Settings" showBack />
 
         <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+<<<<<<< Updated upstream
+=======
+          {/* User Account Section */}
+          <Text style={[styles.sectionTitle, { color: colors.text }]}>Account</Text>
+          <View style={[styles.card, styles.accountCard, { backgroundColor: colors.surface }]}>
+            <View style={styles.accountProfileRow}>
+              <View style={[styles.avatarCircle, { backgroundColor: colors.primaryLight }]}>
+                <Ionicons name="person" size={24} color={colors.primary} />
+              </View>
+              <View style={styles.accountInfo}>
+                <Text style={[styles.accountName, { color: colors.text }]} numberOfLines={1}>
+                  {user?.full_name || 'Ceylon Tea Explorer'}
+                </Text>
+                <Text style={[styles.accountEmail, { color: colors.textMuted }]} numberOfLines={1}>
+                  {user?.email || 'Offline Local Account'}
+                </Text>
+              </View>
+            </View>
+
+            <View style={[styles.divider, { backgroundColor: colors.borderLight, marginVertical: spacing.sm }]} />
+
+            <TouchableOpacity
+              style={styles.logoutBtn}
+              onPress={handleLogout}
+              activeOpacity={0.7}
+              accessibilityRole="button"
+              accessibilityLabel="Log out of TeaLeaf Tracker"
+            >
+              <Ionicons name="log-out-outline" size={20} color={colors.error} />
+              <Text style={[styles.logoutBtnText, { color: colors.error }]}>Log Out</Text>
+            </TouchableOpacity>
+          </View>
+
+>>>>>>> Stashed changes
           {/* Appearance Section */}
           <Text style={[styles.sectionTitle, { color: colors.text }]}>Appearance</Text>
           <View style={[styles.segmentedControl, { backgroundColor: colors.surface }]}>
@@ -223,4 +300,44 @@ const styles = StyleSheet.create({
   divider: {
     height: 1,
   },
+<<<<<<< Updated upstream
+=======
+  accountCard: {
+    paddingVertical: spacing.md,
+  },
+  accountProfileRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  avatarCircle: {
+    width: 48,
+    height: 48,
+    borderRadius: borderRadius.full,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  accountInfo: {
+    marginLeft: spacing.md,
+    flex: 1,
+  },
+  accountName: {
+    fontSize: typography.sizes.md,
+    fontWeight: typography.weights.bold,
+  },
+  accountEmail: {
+    fontSize: typography.sizes.xs + 1,
+    marginTop: 2,
+  },
+  logoutBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: spacing.xs + 2,
+  },
+  logoutBtnText: {
+    fontSize: typography.sizes.sm + 1,
+    fontWeight: typography.weights.semiBold,
+    marginLeft: spacing.xs,
+  },
+>>>>>>> Stashed changes
 });
