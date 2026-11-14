@@ -9,6 +9,7 @@ import { SettingsProvider } from './src/context/SettingsContext';
 import { FavouritesProvider } from './src/context/FavouritesContext';
 import { TripProvider } from './src/context/TripContext';
 import { AuthProvider } from './src/context/AuthContext';
+import { FilterProvider } from './src/context/FilterContext';
 import { RootNavigator } from './src/navigation/RootNavigator';
 import { getDatabase } from './src/database/db';
 import { initAndSeedDatabase } from './src/database/seed';
@@ -58,10 +59,12 @@ const MainApp: React.FC = () => {
       <AuthProvider>
         <FavouritesProvider>
           <TripProvider>
-            <StatusBar style={isDark ? 'light' : 'dark'} />
-            <NavigationContainer documentTitle={{ formatter: () => 'TeaLeaf Tracker' }}>
-              <RootNavigator />
-            </NavigationContainer>
+            <FilterProvider>
+              <StatusBar style={isDark ? 'light' : 'dark'} />
+              <NavigationContainer documentTitle={{ formatter: () => 'TeaLeaf Tracker' }}>
+                <RootNavigator />
+              </NavigationContainer>
+            </FilterProvider>
           </TripProvider>
         </FavouritesProvider>
       </AuthProvider>
