@@ -10,10 +10,7 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { RootStackScreenProps } from '../navigation/types';
-<<<<<<< Updated upstream
-=======
 import { useAuth } from '../context/AuthContext';
->>>>>>> Stashed changes
 import { useTheme } from '../context/ThemeContext';
 import { spacing, borderRadius } from '../theme/spacing';
 import { typography } from '../theme/typography';
@@ -23,10 +20,7 @@ import { heroImages, logoImage } from '../data/images';
 export const WelcomeScreen: React.FC<RootStackScreenProps<'Welcome'>> = ({ navigation }) => {
   const { colors } = useTheme();
   const { formMaxWidth, isDesktop, isTablet, width } = useResponsive();
-<<<<<<< Updated upstream
-=======
   const { user } = useAuth();
->>>>>>> Stashed changes
 
   const handleGetStarted = async () => {
     try {
@@ -34,15 +28,11 @@ export const WelcomeScreen: React.FC<RootStackScreenProps<'Welcome'>> = ({ navig
     } catch {
       // Continue even if storage fails
     }
-<<<<<<< Updated upstream
-    navigation.replace('MainTabs');
-=======
     if (user) {
       navigation.replace('MainTabs');
     } else {
       navigation.replace('Login');
     }
->>>>>>> Stashed changes
   };
 
   const logoSize = width <= 340 ? 120 : width < 600 ? 150 : isTablet ? 190 : 220;
