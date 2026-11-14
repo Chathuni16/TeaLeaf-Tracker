@@ -3,6 +3,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { RootStackParamList } from './types';
 import { MainTabs } from './MainTabs';
 import { WelcomeScreen } from '../screens/WelcomeScreen';
+<<<<<<< Updated upstream
+=======
+import { LoginScreen } from '../screens/LoginScreen';
+import { SignUpScreen } from '../screens/SignUpScreen';
+>>>>>>> Stashed changes
 import { AllTeasScreen } from '../screens/AllTeasScreen';
 import { FilterScreen } from '../screens/FilterScreen';
 import { TeaDetailsScreen } from '../screens/TeaDetailsScreen';
@@ -29,6 +34,11 @@ export const RootNavigator: React.FC = () => {
       }}
     >
       <Stack.Screen name="Welcome" component={WelcomeScreen} />
+<<<<<<< Updated upstream
+=======
+      <Stack.Screen name="Login" component={LoginScreen} />
+      <Stack.Screen name="SignUp" component={SignUpScreen} />
+>>>>>>> Stashed changes
       <Stack.Screen name="MainTabs" component={MainTabs} />
       <Stack.Screen name="AllTeas" component={AllTeasScreen} />
       <Stack.Screen

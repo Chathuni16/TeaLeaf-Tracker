@@ -19,6 +19,11 @@ export type MainTabParamList = {
 
 export type RootStackParamList = {
   Welcome: undefined;
+<<<<<<< Updated upstream
+=======
+  Login: undefined;
+  SignUp: undefined;
+>>>>>>> Stashed changes
   MainTabs: NavigatorScreenParams<MainTabParamList> | undefined;
   AllTeas: { regionFilter?: string; autoFocusSearch?: boolean } | undefined;
   FilterTeas: {
